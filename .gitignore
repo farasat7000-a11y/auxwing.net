@@ -1,0 +1,15 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment / secrets
+.env
+.env.*
+
+# Tooling
+/.claude/
+node_modules/
+
+# Build artifacts / archives
+*.zip
