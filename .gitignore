@@ -13,3 +13,8 @@ node_modules/
 
 # Build artifacts / archives
 *.zip
+
+# Client documents — must never be published to the web
+*.docx
+*.pdf
+*.xlsx

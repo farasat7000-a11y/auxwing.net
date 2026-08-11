@@ -1,13 +1,19 @@
-# ===== Auxiliary Wing Contracting (Aux Wing) — production (.htaccess) =====
+# ===== Right Tech International (RTI) — production (.htaccess) =====
 
 Options -Indexes
 
 RewriteEngine On
 
-# Canonical host = www.auxwing.com.  Redirect non-www -> www.
+# Canonical host = rti-sa.com (no www).  Redirect www -> apex.
 # (Enable "Force HTTPS" in Hostinger hPanel to handle http -> https.)
-RewriteCond %{HTTP_HOST} ^auxwing\.com [NC]
-RewriteRule ^ https://www.auxwing.com%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.rti-sa\.com [NC]
+RewriteRule ^ https://rti-sa.com%{REQUEST_URI} [L,R=301]
+
+# --- CUTOVER STEP: enable ONLY after rti-sa.com is live and serving ---
+# Redirects the old Aux Wing domains to the new one, preserving SEO.
+# Leaving this commented keeps the current auxwing.net site reachable.
+# RewriteCond %{HTTP_HOST} auxwing\. [NC]
+# RewriteRule ^ https://rti-sa.com%{REQUEST_URI} [L,R=301]
 
 # Clean homepage URL: /index.html -> /
 RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]

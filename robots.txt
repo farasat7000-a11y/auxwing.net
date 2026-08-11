@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.auxwing.com/sitemap.xml
+Sitemap: https://rti-sa.com/sitemap.xml
