@@ -37,6 +37,7 @@
   /* Type */
   --serif: "Cormorant Garamond", "Times New Roman", serif;
   --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --arabic: "Tajawal", "Noto Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif;
 
   /* Rhythm */
   --sect: clamp(6rem, 12vw, 11rem);
@@ -306,6 +307,15 @@ body.cursor-hover .cursor-ring {
   letter-spacing: 0.24em; text-transform: uppercase;
   color: var(--gold);
   white-space: nowrap;
+}
+.nav__brand-ar {
+  font-family: var(--arabic);
+  font-size: 0.86rem; font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+  color: var(--t-mid);
+  white-space: nowrap;
+  margin-top: 0.22rem;
 }
 
 .nav__links { display: flex; align-items: center; gap: 2.6rem; }
@@ -1023,8 +1033,11 @@ body.loaded .hero__title .line:nth-child(3) > span { transition-delay: 0.24s; }
 .footer__brand { display: flex; flex-direction: column; gap: 1.8rem; align-items: flex-start; }
 .footer__brand img { height: 58px; width: auto; }
 .footer__brand .ar {
-  font-size: 1.02rem; color: var(--t-mid);
-  letter-spacing: 0.02em;
+  font-family: var(--arabic);
+  font-size: 1.18rem; font-weight: 500;
+  color: var(--t-mid);
+  letter-spacing: 0;
+  line-height: 1.7;
 }
 .footer__brand p {
   font-size: 0.94rem; line-height: 1.9;
@@ -1560,6 +1573,20 @@ body.loaded .hero__title .line:nth-child(3) > span { transition-delay: 0.24s; }
   .footer__top { grid-template-columns: 1fr 1fr; gap: 3rem; }
 }
 
+/* Tighten the nav before it gets cramped against the bilingual lockup. */
+@media (max-width: 1340px) {
+  .nav__links { gap: 1.7rem; }
+  .nav__link { letter-spacing: 0.18em; }
+  .nav__cta { padding: 0.78rem 1.3rem; letter-spacing: 0.22em; margin-left: 0.2rem; }
+}
+
+/* The bilingual brand lockup + full nav needs ~1060px. Switch to the
+   overlay menu below 1100px so the CTA can't overflow the viewport. */
+@media (max-width: 1100px) {
+  .nav__links { display: none; }
+  .burger { display: flex; }
+}
+
 @media (max-width: 940px) {
   .nav__links { display: none; }
   .burger { display: flex; }
@@ -1600,7 +1627,7 @@ body.loaded .hero__title .line:nth-child(3) > span { transition-delay: 0.24s; }
   .form-grid { grid-template-columns: 1fr; }
   .svc-detail__list { grid-template-columns: 1fr; }
   .footer__top { grid-template-columns: 1fr; }
-  .nav__brand-sub { display: none; }
+  .nav__brand-sub, .nav__brand-ar { display: none; }
   .proj-card__body { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .marquee__item { font-size: 1.05rem; gap: 2.6rem; }
   .marquee__track { gap: 2.6rem; }
