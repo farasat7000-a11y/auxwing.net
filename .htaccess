@@ -5,7 +5,10 @@ Options -Indexes
 RewriteEngine On
 
 # Canonical host = rti-sa.com (no www).  Redirect www -> apex.
-# (Enable "Force HTTPS" in Hostinger hPanel to handle http -> https.)
+# (Enable "Force HTTPS Redirect" in cPanel > Domains to handle http -> https.)
+# Never redirect the ACME/AutoSSL validation path, or certificate
+# issuance and renewal for www.rti-sa.com will fail.
+RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteCond %{HTTP_HOST} ^www\.rti-sa\.com [NC]
 RewriteRule ^ https://rti-sa.com%{REQUEST_URI} [L,R=301]
 
