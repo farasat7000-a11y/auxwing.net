@@ -445,15 +445,38 @@ body.menu-open .menu__aside { opacity: 1; transform: translateY(0); }
   overflow: hidden;
   padding-top: 6rem;
 }
-.hero__bg { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.hero__bg { position: absolute; inset: 0; z-index: -2; overflow: hidden; background: var(--ink); }
+
+/* Substation plate. Sits under the gradient/grid treatment; the base colour
+   moved onto .hero__bg so ::before can stay translucent over the photo. */
+.hero__photo {
+  position: absolute; inset: 0;
+  background-image: url("../assets/img/hero-substation.webp?v=1");
+  background-size: cover;
+  background-position: 62% center;
+  background-repeat: no-repeat;
+}
+.hero__photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    /* the headline sits left, so weight the scrim there */
+    linear-gradient(100deg,
+      rgba(10, 10, 12, 0.95) 0%,
+      rgba(10, 10, 12, 0.88) 32%,
+      rgba(10, 10, 12, 0.55) 60%,
+      rgba(10, 10, 12, 0.34) 100%),
+    /* settle the foot so the scroll/meta bar reads */
+    linear-gradient(to top, rgba(10, 10, 12, 0.94) 0%, transparent 40%),
+    linear-gradient(to bottom, rgba(10, 10, 12, 0.72) 0%, transparent 26%);
+}
 .hero__bg::before {
   content: "";
   position: absolute; inset: 0;
   background:
     radial-gradient(52% 44% at 78% 18%, rgba(197, 164, 93, 0.13), transparent 62%),
     radial-gradient(40% 40% at 12% 80%, rgba(142, 113, 58, 0.1), transparent 60%),
-    radial-gradient(70% 70% at 50% 120%, rgba(20, 20, 26, 0.9), transparent 70%),
-    var(--ink);
+    radial-gradient(70% 70% at 50% 120%, rgba(20, 20, 26, 0.6), transparent 70%);
 }
 .hero__bg::after {
   content: "";
@@ -1643,6 +1666,22 @@ body.loaded .hero__title .line:nth-child(3) > span { transition-delay: 0.24s; }
   .wa-fab svg { width: 24px; height: 24px; }
   .nav__brand img { height: 36px; }
   .hero { min-height: 0; padding-top: 8.5rem; }
+  .hero__photo {
+    background-image: url("../assets/img/hero-substation-mobile.webp?v=1");
+    background-position: center center;
+  }
+  /* On a narrow viewport the copy spans the full width, so the desktop
+     left-weighted scrim leaves the paragraph sitting on lit steel. Swap
+     to a vertical scrim: open through the headline, heavier under the
+     small type and the buttons. */
+  .hero__photo::after {
+    background:
+      linear-gradient(to bottom,
+        rgba(10, 10, 12, 0.82) 0%,
+        rgba(10, 10, 12, 0.74) 30%,
+        rgba(10, 10, 12, 0.87) 62%,
+        rgba(10, 10, 12, 0.93) 100%);
+  }
   .hero__meta { position: static; margin-top: 3.5rem; }
   .hero__meta-inner span[style] { padding-right: 0 !important; }
   .hero__actions { width: 100%; }
