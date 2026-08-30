@@ -504,6 +504,7 @@ body.menu-open .menu__aside { opacity: 1; transform: translateY(0); }
 }
 .hero__eyebrow::before { content: ""; width: 3.4rem; height: 1px; background: var(--gold); }
 .hero__eyebrow b { color: var(--gold); font-weight: 600; }
+.hero__eyebrow-loc::before { content: "\B7"; margin-inline-end: 0.55em; }
 
 .hero__title {
   font-family: var(--serif);
@@ -1615,6 +1616,25 @@ body.loaded .hero__title .line:nth-child(3) > span { transition-delay: 0.24s; }
   .svc-detail { grid-template-columns: 1fr; gap: 2rem; }
   .svc-detail__head { position: static; }
   .values-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  /* The eyebrow is a single-line flex row with very wide tracking; below
+     this it no longer fits and the locality either ran off the right edge
+     or broke mid-phrase. Stack it deliberately instead: flex-basis 100%
+     drops the locality onto its own line as a whole, and the separator is
+     dropped because it would dangle at the start of that line. */
+  .hero__eyebrow {
+    flex-wrap: wrap;
+    gap: 0.55rem 0.85rem;
+    letter-spacing: 0.3em;
+    line-height: 1.9;
+    margin-bottom: 2.1rem;
+    min-width: 0;
+  }
+  .hero__eyebrow::before { width: 2rem; flex: none; }
+  .hero__eyebrow-loc { flex-basis: 100%; }
+  .hero__eyebrow-loc::before { content: none; }
 }
 
 @media (max-width: 640px) {
