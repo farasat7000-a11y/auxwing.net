@@ -1,0 +1,23 @@
+---
+deployment:
+  tasks:
+    # Document root for rti-sa.com on this Bluehost account.
+    - export DEPLOYPATH=/home4/juumjemy/public_html/website_50ca1eb0
+    - /bin/mkdir -p $DEPLOYPATH/assets/img $DEPLOYPATH/css $DEPLOYPATH/js
+
+    # Pages and root files
+    - /bin/cp -f index.html $DEPLOYPATH/
+    - /bin/cp -f about.html $DEPLOYPATH/
+    - /bin/cp -f services.html $DEPLOYPATH/
+    - /bin/cp -f projects.html $DEPLOYPATH/
+    - /bin/cp -f contact.html $DEPLOYPATH/
+    - /bin/cp -f 404.html $DEPLOYPATH/
+    - /bin/cp -f robots.txt $DEPLOYPATH/
+    - /bin/cp -f sitemap.xml $DEPLOYPATH/
+    - /bin/cp -f favicon.ico $DEPLOYPATH/
+    - /bin/cp -f .htaccess $DEPLOYPATH/
+
+    # Directories (trailing /. copies contents, not the folder itself)
+    - /bin/cp -Rf assets/. $DEPLOYPATH/assets/
+    - /bin/cp -Rf css/. $DEPLOYPATH/css/
+    - /bin/cp -Rf js/. $DEPLOYPATH/js/
