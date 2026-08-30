@@ -310,12 +310,15 @@ body.cursor-hover .cursor-ring {
 }
 .nav__brand-ar {
   font-family: var(--arabic);
-  font-size: 0.86rem; font-weight: 500;
-  letter-spacing: 0;
+  font-size: 0.98rem; font-weight: 500;   /* Arabic reads optically smaller than Latin */
+  letter-spacing: 0;              /* never letter-space Arabic — it breaks the joins */
   line-height: 1.35;
   color: var(--t-mid);
-  white-space: nowrap;
   margin-top: 0.22rem;
+  /* stretch the words so the Arabic line matches the English line width */
+  text-align: justify;
+  -moz-text-align-last: justify;
+  text-align-last: justify;
 }
 
 .nav__links { display: flex; align-items: center; gap: 2.6rem; }
