@@ -318,7 +318,12 @@ body.cursor-hover .cursor-ring {
   /* centred under the English, with gentle word spacing for an airy feel
      that echoes the letter-spaced Latin line (never letter-space Arabic) */
   text-align: center;
-  word-spacing: 1em;
+  word-spacing: 0.35em;
+  /* stretch the letterforms horizontally so the line spans the full
+     width of the English above it (transform doesn't affect layout) */
+  display: block;
+  transform: scaleX(1.93);
+  transform-origin: center;
 }
 
 .nav__links { display: flex; align-items: center; gap: 2.6rem; }
