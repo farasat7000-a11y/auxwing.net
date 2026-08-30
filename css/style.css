@@ -318,7 +318,7 @@ body.cursor-hover .cursor-ring {
   /* centred under the English, with gentle word spacing for an airy feel
      that echoes the letter-spaced Latin line (never letter-space Arabic) */
   text-align: center;
-  word-spacing: 0.4em;
+  word-spacing: 1em;
 }
 
 .nav__links { display: flex; align-items: center; gap: 2.6rem; }
