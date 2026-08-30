@@ -16,6 +16,7 @@ deployment:
     - /bin/cp -f sitemap.xml $DEPLOYPATH/
     - /bin/cp -f favicon.ico $DEPLOYPATH/
     - /bin/cp -f .htaccess $DEPLOYPATH/
+    - /bin/cp -f send.php $DEPLOYPATH/
 
     # Directories (trailing /. copies contents, not the folder itself)
     - /bin/cp -Rf assets/. $DEPLOYPATH/assets/

@@ -221,25 +221,47 @@
     });
   }
 
-  /* ---------- Contact form (mailto handoff until backend is wired) ---------- */
+  /* ---------- Contact form (posts to send.php) ---------- */
   const form = document.getElementById("contact-form");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
+      const status = form.querySelector(".form-status");
+      const btn = form.querySelector('button[type="submit"]');
       const data = new FormData(form);
       const name = (data.get("name") || "").toString().trim();
       const email = (data.get("email") || "").toString().trim();
-      const scope = (data.get("scope") || "").toString();
       const msg = (data.get("message") || "").toString().trim();
-      const status = form.querySelector(".form-status");
+
       if (!name || !email || !msg) {
         if (status) status.textContent = "Please complete the required fields.";
         return;
       }
-      const subject = encodeURIComponent("New enquiry — " + name + (scope ? " · " + scope : ""));
-      const body = encodeURIComponent(msg + "\n\n— " + name + "\n" + email);
-      window.location.href = "mailto:info@auxwing.com?subject=" + subject + "&body=" + body;
-      if (status) status.textContent = "Opening your email client…";
+
+      if (btn) btn.disabled = true;
+      if (status) status.textContent = "Sending\u2026";
+
+      fetch("send.php", { method: "POST", body: data })
+        .then(function (res) {
+          return res.json().catch(function () { return { ok: false }; });
+        })
+        .then(function (out) {
+          if (out && out.ok) {
+            form.reset();
+            if (status) status.textContent =
+              "Thank you \u2014 your enquiry has been sent. We reply within one business day.";
+          } else {
+            if (status) status.textContent =
+              (out && out.error) || "Something went wrong. Please email info@rti-sa.com directly.";
+          }
+        })
+        .catch(function () {
+          if (status) status.textContent =
+            "Network error. Please email info@rti-sa.com directly.";
+        })
+        .finally(function () {
+          if (btn) btn.disabled = false;
+        });
     });
   }
 
