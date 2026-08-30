@@ -37,7 +37,7 @@
   /* Type */
   --serif: "Cormorant Garamond", "Times New Roman", serif;
   --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --arabic: "Tajawal", "Noto Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif;
+  --arabic: "Almarai", "Noto Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif;
 
   /* Rhythm */
   --sect: clamp(6rem, 12vw, 11rem);
@@ -310,20 +310,18 @@ body.cursor-hover .cursor-ring {
 }
 .nav__brand-ar {
   font-family: var(--arabic);
-  font-size: 0.98rem; font-weight: 500;   /* Arabic reads optically smaller than Latin */
+  font-size: 0.98rem; font-weight: 400;   /* Arabic reads optically smaller than Latin */
   letter-spacing: 0;              /* never letter-space Arabic — it breaks the joins */
   line-height: 1.35;
   color: var(--t-mid);
   margin-top: 0.22rem;
-  /* centred under the English, with gentle word spacing for an airy feel
-     that echoes the letter-spaced Latin line (never letter-space Arabic) */
+  /* The line spans the full width of the English above it via kashida
+     (tatweel, U+0640) baked into the markup — elongation sits in the
+     connecting strokes, so the letterforms keep their drawn proportions.
+     No scaleX: geometric stretching distorts Arabic badly. */
   text-align: center;
   word-spacing: 0.35em;
-  /* stretch the letterforms horizontally so the line spans the full
-     width of the English above it (transform doesn't affect layout) */
   display: block;
-  transform: scaleX(1.93);
-  transform-origin: center;
 }
 
 .nav__links { display: flex; align-items: center; gap: 2.6rem; }
@@ -1042,7 +1040,7 @@ body.loaded .hero__title .line:nth-child(3) > span { transition-delay: 0.24s; }
 .footer__brand img { height: 58px; width: auto; }
 .footer__brand .ar {
   font-family: var(--arabic);
-  font-size: 1.18rem; font-weight: 500;
+  font-size: 1.18rem; font-weight: 400;
   color: var(--t-mid);
   letter-spacing: 0;
   line-height: 1.7;
