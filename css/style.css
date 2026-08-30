@@ -315,10 +315,10 @@ body.cursor-hover .cursor-ring {
   line-height: 1.35;
   color: var(--t-mid);
   margin-top: 0.22rem;
-  /* stretch the words so the Arabic line matches the English line width */
-  text-align: justify;
-  -moz-text-align-last: justify;
-  text-align-last: justify;
+  /* centred under the English, with gentle word spacing for an airy feel
+     that echoes the letter-spaced Latin line (never letter-space Arabic) */
+  text-align: center;
+  word-spacing: 0.4em;
 }
 
 .nav__links { display: flex; align-items: center; gap: 2.6rem; }
