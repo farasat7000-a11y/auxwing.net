@@ -224,6 +224,29 @@
   /* ---------- Contact form (posts to send.php) ---------- */
   const form = document.getElementById("contact-form");
   if (form) {
+    // Some hosts (Bluehost) guard PHP endpoints with a cookie challenge:
+    // they answer 409 with a script that sets a cookie and reloads. A static
+    // site never picks that cookie up, so satisfy it once and retry.
+    function postEnquiry(data, retried) {
+      return fetch("send.php", {
+        method: "POST",
+        body: data,
+        credentials: "same-origin"
+      }).then(function (res) {
+        if (res.status === 409 && !retried) {
+          return res.text().then(function (txt) {
+            const m = txt.match(/document\.cookie\s*=\s*["']([^"']+)["']/);
+            if (m) {
+              document.cookie = m[1] + "; path=/";
+              return postEnquiry(data, true);
+            }
+            return { ok: false };
+          });
+        }
+        return res.json().catch(function () { return { ok: false }; });
+      });
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       const status = form.querySelector(".form-status");
@@ -241,10 +264,7 @@
       if (btn) btn.disabled = true;
       if (status) status.textContent = "Sending\u2026";
 
-      fetch("send.php", { method: "POST", body: data })
-        .then(function (res) {
-          return res.json().catch(function () { return { ok: false }; });
-        })
+      postEnquiry(data, false)
         .then(function (out) {
           if (out && out.ok) {
             form.reset();
